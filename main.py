@@ -17,7 +17,7 @@ if 'ats_analysis' not in st.session_state:
     st.session_state['ats_analysis'] = None
 
 # ==========================================
-# 2. CORE FUNCTIONS (UNCHANGED)
+# 2. CORE FUNCTIONS 
 # ==========================================
 
 def extract_text(file):
@@ -112,7 +112,7 @@ def enhance_resume(resume, jd, api_key, model):
     return json.loads(clean_json_string(raw_response))
 
 # ==========================================
-# 3. PDF GENERATOR (NEW)
+# 3. PDF GENERATOR 
 # ==========================================
 class PDF(FPDF):
     def header(self):
@@ -169,7 +169,7 @@ def generate_pdf(data):
     return pdf.output(dest='S').encode('latin1')
 
 # ==========================================
-# 4. LATEX TEMPLATES (NEW)
+# 4. LATEX TEMPLATES 
 # ==========================================
 
 TEMPLATES = {
@@ -309,7 +309,7 @@ if raw_text and jd:
                 else: st.session_state['data'] = data; st.json(data)
 
 # ==========================================
-# STEP 4: ENHANCED EXPORT (NEW)
+# STEP 4: ENHANCED EXPORT 
 # ==========================================
 if st.session_state.get('data'):
     st.divider()
@@ -361,4 +361,5 @@ if st.session_state.get('data'):
                 doc.add_paragraph(p, style='List Bullet')
         doc.save("resume.docx")
         with open("resume.docx", "rb") as f:
+
             st.download_button("Download .docx", f, "resume.docx")
